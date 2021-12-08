@@ -53,7 +53,6 @@ const wsServer = new WS.Server({ server });
 const clients = [];
 
 router.get('/users', async (ctx, next) => {
-  console.log('get index');
   ctx.response.body = clients;
 });
 
@@ -63,7 +62,6 @@ router.post('/users', async (ctx, next) => {
 });
 
 router.delete('/users/:name', async (ctx, next) => {
-  console.log(ctx.params.name);
   const index = clients.findIndex(({ name }) => name === ctx.params.name);
   if (index !== -1) {
     clients.splice(index, 1);
@@ -95,5 +93,5 @@ wsServer.on('connection', (ws, req) => {
 });
 
 app.use(router.routes()).use(router.allowedMethods());
-const port = process.env.PORT || 7070;
+const port = process.env.PORT || 3000;
 server.listen(port);
